@@ -6,7 +6,7 @@ public:
         
         vector<int> dp(n,1);
         vector<int>hash(n);
-        hash[0]=-1;
+        hash[0]=0;
         int maxi = 0;
         for(int i = 1 ; i<nums.size() ; i++){
             hash[i]=i;
@@ -17,31 +17,16 @@ public:
                 }
                 
             }
+            if(dp[i]>dp[maxi]) maxi = i;
         }
-        auto max_iindex = max_element(dp.begin(),dp.end());
-        int max_index = max_iindex-dp.begin();
-        cout<<max_index<<endl;
-        //for(auto a : hash) cout<<a<<endl;
+        
 
         vector<int>ans;
-        while(max_index>=0){
-            if(max_index==0){
-                ans.push_back(nums[max_index]);
-                max_index--;
-            }
-            else{
-                ans.push_back(nums[max_index]);
-                if(max_index==hash[max_index]){
-                    max_index=-1;
-                }
-                else{
-                    max_index=hash[max_index];
-                }
-
-            }
-            
-            
+        while(hash[maxi] != maxi){
+            ans.push_back(nums[maxi]);
+            maxi = hash[maxi];
         }
+         ans.push_back(nums[maxi]);
         return ans;
         
     }
