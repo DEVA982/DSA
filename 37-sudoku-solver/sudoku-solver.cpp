@@ -27,7 +27,7 @@ public:
             return correctSudoku(row,col+1,board);
         }
         vector<char> nums = {'1','2','3','4','5','6','7','8','9'};
-        for(auto  num : nums){
+        for(char  num : nums){
             if(numCheck(row,col,board,num)){
                 board[row][col]=num;
                 if(correctSudoku( row ,col+1 ,board )) return true;
