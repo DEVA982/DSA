@@ -1,8 +1,8 @@
 class Solution {
 public:
-    void solve(int ind,vector<int>& nums,vector<vector<int>> &ans,vector<int>flag,vector<int>rec){
+    void solve(vector<int>& nums,vector<vector<int>> &ans,vector<int>flag,vector<int>rec){
         int n = nums.size();
-        if(ind==n) {
+        if(rec.size()==nums.size()) {
             ans.push_back(rec);
             return ;
 
@@ -12,7 +12,7 @@ public:
             if(flag[i]!=0) continue;
             rec.push_back(nums[i]);
             flag[i]=1;
-            solve(ind+1,nums,ans,flag,rec);
+            solve(nums,ans,flag,rec);
             rec.pop_back();
             flag[i]=0;
             
@@ -24,7 +24,7 @@ public:
         vector<vector<int>> ans;
         vector<int>flag(nums.size(),0);
         vector<int>rec;
-        solve(0,nums,ans,flag,rec);
+        solve(nums,ans,flag,rec);
         
         return ans;
 
