@@ -1,28 +1,48 @@
 class Solution {
 public:
-    void solve (vector<int> &visited,string&s , vector<string>&ans,int n,int ind){
-        if (ind == n+1){
-            ans.push_back(s);
-            return;
+    bool solve(vector<int>& visited, string& s,
+               int n, int ind, int& count, int k, string& ans) {
+
+        if (ind == n + 1) {
+
+            count++;
+
+            if (count == k) {
+                ans = s;
+                return true;   // kth permutation found
+            }
+
+            return false;
         }
-        for(int a=1;a<=n;a++){
-            if(visited[a]==0){
-                visited[a]=1;
-                
-                s.push_back('0'+a);
-                solve(visited,s,ans,n,ind+1);
-                visited[a]=0;
+
+        for (int a = 1; a <= n; a++) {
+
+            if (visited[a] == 0) {
+
+                visited[a] = 1;
+                s.push_back('0' + a);
+
+                if (solve(visited, s, n, ind + 1, count, k, ans))
+                    return true;
+
                 s.pop_back();
+                visited[a] = 0;
             }
         }
-    }
-    string getPermutation(int n, int k) {
-        string s;
-        vector<int>visited(n+1,0);
-        vector<string>ans;
-        solve(visited,s,ans,n,1);
-        return ans[k-1];
 
-        
+        return false;
+    }
+
+    string getPermutation(int n, int k) {
+
+        vector<int> visited(n + 1, 0);
+        string s;
+        string ans;
+
+        int count = 0;
+
+        solve(visited, s, n, 1, count, k, ans);
+
+        return ans;
     }
 };
