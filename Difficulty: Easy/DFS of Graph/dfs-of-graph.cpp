@@ -1,21 +1,22 @@
 class Solution {
 public:
-    void dfs(int node ,vector<vector<int>>& adj,vector<int> &ans,vector<int> &flag ){
-        ans.push_back(node);
-        flag[node]=1;
-        for(int num:adj[node]){
-            if(flag[num]==0){
-                dfs(num,adj,ans,flag);
-            }
-        }
-        
-        
-    }
     vector<int> dfs(vector<vector<int>>& adj) {
         int n = adj.size();
+        vector<int> visited(n, 0);
         vector<int> ans;
-        vector<int> flag(n);
-        dfs(0,adj,ans,flag);
+
+        function<void(int)> solve = [&](int node) {
+            visited[node] = 1;
+            ans.push_back(node);
+
+            for(int next : adj[node]) {
+                if(!visited[next]) {
+                    solve(next);
+                }
+            }
+        };
+
+        solve(0);
         return ans;
     }
 };
