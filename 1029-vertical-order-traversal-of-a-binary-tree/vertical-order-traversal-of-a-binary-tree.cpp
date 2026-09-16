@@ -13,7 +13,7 @@ class Solution {
 public:
     void dfs(TreeNode* node,int row,int col,vector<tuple<int,int,int>> &nodes){
         if(node==nullptr) return;
-        nodes.emplace_back(col,row,node->val);
+        nodes.push_back({col,row,node->val});
         dfs(node->left,row+1,col-1,nodes);
         dfs(node->right,row+1,col+1,nodes);
     }
