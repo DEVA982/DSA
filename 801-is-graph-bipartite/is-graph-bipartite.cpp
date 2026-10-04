@@ -6,22 +6,22 @@ public:
         for(int i = 0 ; i<n ; i++){
             if(ans[i]!=-1){
                 continue;
+
             }
             queue<int> q;
-            ans[i]=0;
             q.push(i);
-            while(!q.empty()){
+            ans[i]=0;
+            while(q.size()>0){
                 int node = q.front();
                 q.pop();
-                for(auto adj : graph[node]){
-                    if(ans[adj]==-1){
-                        ans[adj]=!(ans[node]);
-                        q.push(adj);
+                for(auto adjNode:graph[node]){
+                    if(ans[adjNode]==-1){
+                        ans[adjNode]=!ans[node];
+                        q.push(adjNode);
                     }
-                    else if(ans[adj] == ans[node]){
+                    else if(ans[adjNode]==ans[node]){
                         return false;
                     }
-
                 }
             }
         }
