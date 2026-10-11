@@ -13,7 +13,7 @@ public:
                 st.pop();
             }
 
-            if (!st.empty()) {
+            if (ans[idx]==-1 && !st.empty()) {
                 ans[idx] = st.top();
             }
 
