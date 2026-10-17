@@ -1,8 +1,7 @@
+
 class Solution {
 public:
     int countPaths(int n, vector<vector<int>>& roads) {
-        int mod = 1e9 + 7;
-
         vector<vector<pair<int,int>>> adj(n);
 
         for(auto road : roads) {
@@ -15,10 +14,12 @@ public:
             greater<pair<long long,int>>> pq;
 
         vector<long long> dist(n, LLONG_MAX);
-        vector<int> dp(n, 0);
+        vector<long long> dp(n, 0);
 
+        long long mod = 1e9 + 7;
         dist[0] = 0;
         dp[0] = 1;
+
         pq.push({0, 0});
 
         while(!pq.empty()) {
@@ -28,7 +29,7 @@ public:
             long long d = it.first;
             int parent = it.second;
 
-            if(dist[parent] != d) continue;
+            if(d != dist[parent]) continue;
 
             for(auto next : adj[parent]) {
                 int node = next.first;
