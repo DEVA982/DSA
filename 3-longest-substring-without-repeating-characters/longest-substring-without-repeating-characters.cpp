@@ -3,20 +3,18 @@ public:
     int lengthOfLongestSubstring(string s) {
         int n = s.size();
         int ans = 0;
-        int left = 0 ; 
-        int right = 0 ;
-        unordered_set <char> charset;
-        while(right<n){
-            if(charset.find(s[right])==charset.end()){
-                charset.insert(s[right]);
-                ans = max(ans,right-left+1);
-                right++;
+        int left = 0;
+        vector<int> last(256, -1);
+
+        for(int right = 0; right < n; right++) {
+            if(last[s[right]] >= left) {
+                left = last[s[right]] + 1;
             }
-            else{
-                charset.erase(s[left]);
-                left++;
-            }
+
+            last[s[right]] = right;
+            ans = max(ans, right - left + 1);
         }
+
         return ans;
     }
 };
