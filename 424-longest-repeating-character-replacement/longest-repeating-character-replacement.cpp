@@ -9,15 +9,12 @@ public:
 
         for (int right = 0; right < n; right++) {
             charset[s[right]]++;
-
-            maxFreq = max(maxFreq, charset[s[right]]);
-
-            while ((right - left + 1) - maxFreq > k) {
+            maxFreq=max(maxFreq,charset[s[right]]);
+            while(right-left+1-maxFreq > k){
                 charset[s[left]]--;
                 left++;
             }
-
-            ans = max(ans, right - left + 1);
+            ans=max(ans,right-left+1);
         }
 
         return ans;
