@@ -1,15 +1,13 @@
 class Solution {
 public:
-    int timer =1;
-    void dfs(vector<vector<int>>&adj ,int parent,int node , vector<int>&low ,vector<int> &tin,
-    vector<int>&visited , vector<vector<int>>&bridges ){
+    int timer = 0;
+    void dfs(vector<vector<int>>&adj,int parent , int node ,vector<int>&low , vector<int>&tin,
+    vector<int>&visited,vector<vector<int>>&bridges){
+        timer++;
         visited[node]=1;
         tin[node]=low[node]=timer;
-        timer++;
         for(auto next : adj[node]){
-            if(next==parent){
-                continue;
-            }
+            if(parent==next) continue;
             if(visited[next]==0){
                 dfs(adj,node,next,low,tin,visited,bridges);
                 low[node]=min(low[node],low[next]);
@@ -20,7 +18,6 @@ public:
             else{
                 low[node]=min(low[node],low[next]);
             }
-
         }
     }
     vector<vector<int>> criticalConnections(int n, vector<vector<int>>& connections) {
